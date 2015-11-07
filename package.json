@@ -11,9 +11,9 @@
     "url": "git+https://github.com/sameke/bunyan-log.git"
   },
   "keywords": [
-    "\"bunyan\"",
-    "\"logging\"",
-    "\"logger\""
+    "bunyan",
+    "logging",
+    "logger"
   ],
   "author": "weagle08 <weagle08@gmail.com> (https://github.com/weagle08)",
   "license": "MIT",
