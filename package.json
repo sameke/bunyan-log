@@ -4,7 +4,7 @@
   "description": "Logger class based on node-bunyan-logger which defaults most commonly used logger settings.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "mocha -R spec"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,10 @@
   "homepage": "https://github.com/sameke/bunyan-log#readme",
   "dependencies": {
     "bunyan": "^1.5.1",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
     "chai": "^3.4.0",
-    "mkdirp": "^0.5.1",
     "mocha": "^2.3.3"
   }
 }
