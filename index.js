@@ -4,4 +4,4 @@
 'use strict';
 const Logger = require('./lib/Logger');
 
-module.eports = Logger;
+module.exports = Logger;
