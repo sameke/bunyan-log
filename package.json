@@ -1,0 +1,30 @@
+{
+  "name": "bunyan-log",
+  "version": "1.0.0",
+  "description": "Logger class based on node-bunyan-logger which defaults most commonly used logger settings.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sameke/bunyan-log.git"
+  },
+  "keywords": [
+    "\"bunyan\"",
+    "\"logging\"",
+    "\"logger\""
+  ],
+  "author": "weagle08 <weagle08@gmail.com> (https://github.com/weagle08)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sameke/bunyan-log/issues"
+  },
+  "homepage": "https://github.com/sameke/bunyan-log#readme",
+  "dependencies": {
+    "bunyan": "^1.5.1",
+    "chai": "^3.4.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^2.3.3"
+  }
+}
