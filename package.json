@@ -1,6 +1,6 @@
 {
   "name": "bunyan-log",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Logger class based on node-bunyan-logger which defaults most commonly used logger settings.",
   "main": "index.js",
   "scripts": {
