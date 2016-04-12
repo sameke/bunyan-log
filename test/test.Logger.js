@@ -7,9 +7,10 @@ var chai = require('./chai');
 const Logger = require('../lib/Logger');
 const fs = require('fs');
 const path = require('path');
+const cluster = require('cluster');
 
 describe('LOGGER', function(){
-   it('logging to file', function(done){
+    it('logs to file', function(done){
        var logger = new Logger();
        logger.error('hello world');
 
@@ -20,5 +21,5 @@ describe('LOGGER', function(){
            expect(stats.isFile()).to.equal(true);
            done();
        });
-   });
+    });
 });
