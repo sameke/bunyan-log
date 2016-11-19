@@ -11,10 +11,10 @@ const cluster = require('cluster');
 
 describe('LOGGER', function(){
     it('logs to file', function(done){
-       var logger = new Logger();
+       var logger = new Logger({name:'bunyanlog.test'});
        logger.error('hello world');
 
-       var logFile = 'app.' + process.pid + '.log';
+       var logFile = 'bunyanlog.test.log';
 
        fs.stat(path.join('./logs/', logFile), function(error, stats){
            expect(error).to.equal(null);
