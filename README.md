@@ -12,7 +12,7 @@ $npm install bunyan-log
 ```javascript
 var Logger = require('bunyan-log');
 
-var log = new Logger();
+var log = new Logger({name: 'myLogger'});
 log.debug('hi, my name is ben.');
 ```
 
@@ -20,5 +20,6 @@ log.debug('hi, my name is ben.');
 ``` var log = new Logger([options])```
 See [node-bunyan](https://github.com/trentm/node-bunyan) for options that can be set.
 
-logging to stdout: ```options.useStdOut = true```
+logging to stdout: ```options.useStdOut = true;```
+not logging to file: ```options.useFile = false;```
 default path for logs is [root]/logs directory

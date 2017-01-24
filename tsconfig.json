@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "outDir": "lib",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "strictNullChecks": true,
+        "declaration": false
+    },
+    "include": [
+        "Logger.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "lib"
+    ]
+}
