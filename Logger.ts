@@ -2,7 +2,6 @@ import * as bunyan from 'bunyan';
 import * as mkdirp from 'mkdirp';
 import * as path from 'path';
 import * as cluster from 'cluster';
-/// <reference path="./@types/CircularJson.d.ts"/>
 import * as CJSON from 'circular-json';
 
 declare let process: any;
@@ -40,9 +39,12 @@ export = class Logger {
     public child: (opts: any) => Logger;
 
     constructor(options: any){
-        if(options == null || !(options instanceof Object) || options.name == null) {
+        options = options || {};
+        if(!(options instanceof Object) || options.name == null) {
             throw new Error('name property required');
         }
+
+        options.isNewProcess = options.isNewProcess || cluster.isMaster;
 
         let t = options.level || 'info';
         this._level = bunyan.INFO;
@@ -57,7 +59,7 @@ export = class Logger {
         let appendFields = Object.assign({}, options);
         removeDefaultFields(appendFields);
 
-        if(cluster.isWorker === true) {
+        if(cluster.isWorker === true && options.isNewProcess === false) {
             this.trace = (msg) => {
                 if(this._level <= bunyan.TRACE) {
                     msg = transformError(msg);

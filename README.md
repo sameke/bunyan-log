@@ -22,4 +22,5 @@ See [node-bunyan](https://github.com/trentm/node-bunyan) for options that can be
 
 logging to stdout: ```options.useStdOut = true;```
 not logging to file: ```options.useFile = false;```
+allowing logging to new log file on seperate process: ```options.isNewProcess = true```
 default path for logs is [root]/logs directory
