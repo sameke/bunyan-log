@@ -268,6 +268,7 @@ function removeDefaultFields(obj) {
     delete obj.period;
     delete obj.logType;
     delete obj.maxLogs;
+    delete obj.isNewProcess;
 }
 
 function transformError(error) {
