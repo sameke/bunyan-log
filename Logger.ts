@@ -44,7 +44,8 @@ export = class Logger {
             throw new Error('name property required');
         }
 
-        options.isNewProcess = options.isNewProcess || cluster.isMaster;
+        options.isNewProcess = options.isNewProcess === true ? true : cluster.isMaster;
+        options.sendToParent = options.sendToParent === true ? true : false;
 
         let t = options.level || 'info';
         this._level = bunyan.INFO;
@@ -59,7 +60,7 @@ export = class Logger {
         let appendFields = Object.assign({}, options);
         removeDefaultFields(appendFields);
 
-        if(cluster.isWorker === true && options.isNewProcess === false) {
+        if((cluster.isWorker === true && options.isNewProcess === false) || options.sendToParent === true) {
             this.trace = (msg) => {
                 if(this._level <= bunyan.TRACE) {
                     msg = transformError(msg);
@@ -269,6 +270,7 @@ function removeDefaultFields(obj) {
     delete obj.logType;
     delete obj.maxLogs;
     delete obj.isNewProcess;
+    delete obj.sendToParent;
 }
 
 function transformError(error) {
