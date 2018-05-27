@@ -1,9 +1,16 @@
 "use strict";
-const bunyan = require("bunyan");
-const mkdirp = require("mkdirp");
-const path = require("path");
-const cluster = require("cluster");
-const CJSON = require("circular-json");
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+const bunyan = __importStar(require("bunyan"));
+const mkdirp = __importStar(require("mkdirp"));
+const path = __importStar(require("path"));
+const CJSON = __importStar(require("circular-json"));
+const cluster = require('cluster');
 const LOG_LEVELS = [
     { name: 'trace', level: bunyan.TRACE },
     { name: 'debug', level: bunyan.DEBUG },
@@ -267,3 +274,4 @@ module.exports = class Logger {
         }
     }
 };
+//# sourceMappingURL=Logger.js.map

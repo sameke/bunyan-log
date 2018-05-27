@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "module": "commonjs",
+        "esModuleInterop": true,
         "target": "es6",
-        "outDir": "lib",
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "noImplicitReturns": true,
-        "strictNullChecks": true,
-        "declaration": false
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": ".",
+        "baseUrl": "."
     },
+    "files": [
+        "./node_modules/@types/node/index.d.ts"
+    ],
     "include": [
-        "Logger.ts"
+        "./**/*.ts"
     ],
     "exclude": [
-        "node_modules",
-        "lib"
+        "node_modules"
     ]
 }

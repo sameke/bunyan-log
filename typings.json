@@ -1,4 +1,0 @@
-{
-    "name": "bunyan-log",
-    "main": "lib/Logger.d.ts"
-}

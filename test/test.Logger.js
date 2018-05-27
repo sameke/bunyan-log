@@ -4,7 +4,7 @@
 'use strict';
 
 var chai = require('./chai');
-const Logger = require('../lib/Logger');
+const Logger = require('../Logger');
 const fs = require('fs');
 const path = require('path');
 const cluster = require('cluster');

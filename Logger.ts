@@ -1,8 +1,9 @@
 import * as bunyan from 'bunyan';
 import * as mkdirp from 'mkdirp';
 import * as path from 'path';
-import * as cluster from 'cluster';
 import * as CJSON from 'circular-json';
+
+const cluster = require('cluster');
 
 declare let process: any;
 
@@ -226,8 +227,8 @@ export = class Logger {
                 this.child = logger.child.bind(logger);
 
                 //intercept worker logs
-                cluster.on('fork', (worker) => {
-                    worker.on('message', (message) => {
+                cluster.on('fork', (worker: any) => {
+                    worker.on('message', (message: any) => {
                         if(message != null && message.isLog == true) {
                             if(message.isCircular === true) {
                                 let orig = CJSON.parse(message.obj);
@@ -240,11 +241,11 @@ export = class Logger {
                             delete message.level;
                             delete message.isLog;
 
-                            if(this[l] != null) {
+                            if((<any>this)[l] != null) {
                                 if(Object.keys(message).length > 0) {
-                                    this[l](message, msg);
+                                    (<any>this)[l](message, msg);
                                 } else {
-                                    this[l](msg);
+                                    (<any>this)[l](msg);
                                 }
                             }
                         }
@@ -257,7 +258,7 @@ export = class Logger {
     }
 }
 
-function removeDefaultFields(obj) {
+function removeDefaultFields(obj: any) {
     delete obj.name;
     delete obj.level;
     delete obj.stream;
@@ -273,7 +274,7 @@ function removeDefaultFields(obj) {
     delete obj.sendToParent;
 }
 
-function transformError(error) {
+function transformError(error: any) {
     if(error == null) {
         error = {};
     }
@@ -287,8 +288,8 @@ function transformError(error) {
 
         let keys = Object.keys(error);
         for(let k of keys) {
-            if(retVal[k] == null) {
-                retVal[k] = error[k];
+            if((<any>retVal)[k] == null) {
+                (<any>retVal)[k] = (<any>error)[k];
             }
         }
 
@@ -298,7 +299,7 @@ function transformError(error) {
     return error;
 }
 
-function sendMessage(msg) {
+function sendMessage(msg: any) {
     try {
         process.send(msg);
     } catch(ex) {
