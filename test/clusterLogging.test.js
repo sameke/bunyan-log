@@ -1,5 +1,5 @@
 const cluster = require('cluster');
-const Logger = require('../Logger');
+const Logger = require('../Logger').Logger;
 
 let log = new Logger({
     name: 'clustertest',

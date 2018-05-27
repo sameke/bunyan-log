@@ -16,7 +16,7 @@ const LOG_LEVELS = [
     {name: 'fatal', level: bunyan.FATAL}
 ];
 
-export = class Logger {
+export class Logger {
     private _level: number;
     set Level(value: number | string) {
         for(let l of LOG_LEVELS) {

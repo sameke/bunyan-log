@@ -6,6 +6,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const bunyan = __importStar(require("bunyan"));
 const mkdirp = __importStar(require("mkdirp"));
 const path = __importStar(require("path"));
@@ -19,57 +20,7 @@ const LOG_LEVELS = [
     { name: 'error', level: bunyan.ERROR },
     { name: 'fatal', level: bunyan.FATAL }
 ];
-function removeDefaultFields(obj) {
-    delete obj.name;
-    delete obj.level;
-    delete obj.stream;
-    delete obj.streams;
-    delete obj.serializers;
-    delete obj.src;
-    delete obj.path;
-    delete obj.useStdOut;
-    delete obj.period;
-    delete obj.logType;
-    delete obj.maxLogs;
-    delete obj.isNewProcess;
-    delete obj.sendToParent;
-}
-function transformError(error) {
-    if (error == null) {
-        error = {};
-    }
-    if (error instanceof Error) {
-        let retVal = {
-            message: error.message,
-            name: error.name,
-            stack: error.stack
-        };
-        let keys = Object.keys(error);
-        for (let k of keys) {
-            if (retVal[k] == null) {
-                retVal[k] = error[k];
-            }
-        }
-        return retVal;
-    }
-    return error;
-}
-function sendMessage(msg) {
-    try {
-        process.send(msg);
-    }
-    catch (ex) {
-        //more than likely a circular object exception        
-        let m = CJSON.stringify(msg);
-        let t = {
-            isCircular: true,
-            isLog: true,
-            obj: m
-        };
-        process.send(t);
-    }
-}
-module.exports = class Logger {
+class Logger {
     set Level(value) {
         for (let l of LOG_LEVELS) {
             if (l.name == value || l.level == value) {
@@ -273,5 +224,56 @@ module.exports = class Logger {
             }
         }
     }
-};
+}
+exports.Logger = Logger;
+function removeDefaultFields(obj) {
+    delete obj.name;
+    delete obj.level;
+    delete obj.stream;
+    delete obj.streams;
+    delete obj.serializers;
+    delete obj.src;
+    delete obj.path;
+    delete obj.useStdOut;
+    delete obj.period;
+    delete obj.logType;
+    delete obj.maxLogs;
+    delete obj.isNewProcess;
+    delete obj.sendToParent;
+}
+function transformError(error) {
+    if (error == null) {
+        error = {};
+    }
+    if (error instanceof Error) {
+        let retVal = {
+            message: error.message,
+            name: error.name,
+            stack: error.stack
+        };
+        let keys = Object.keys(error);
+        for (let k of keys) {
+            if (retVal[k] == null) {
+                retVal[k] = error[k];
+            }
+        }
+        return retVal;
+    }
+    return error;
+}
+function sendMessage(msg) {
+    try {
+        process.send(msg);
+    }
+    catch (ex) {
+        //more than likely a circular object exception        
+        let m = CJSON.stringify(msg);
+        let t = {
+            isCircular: true,
+            isLog: true,
+            obj: m
+        };
+        process.send(t);
+    }
+}
 //# sourceMappingURL=Logger.js.map
