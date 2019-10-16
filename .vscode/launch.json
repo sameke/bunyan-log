@@ -7,9 +7,22 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Cluster Test",
-            "program": "${workspaceRoot}\\test\\clusterLogging.test.js",
-            "cwd": "${workspaceRoot}"
+            "name": "Mocha TS Tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--require",
+                "ts-node/register",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/test/**/*.test.ts"
+            ],
+            "env": {
+                "NODE_ENV": "dev"
+            },
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector"
         },
         {
             "type": "node",
