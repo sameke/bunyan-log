@@ -49,4 +49,10 @@ export interface ILoggerOptions {
      * whether to log source line (NOTE: this is slow so not recommended in production)
      */
     src: boolean;
+
+    /**
+     * specifies wether to send log messages to parent when operating in cluster mode
+     * @default true
+     */
+    logToParent: boolean;
 }

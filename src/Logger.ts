@@ -33,10 +33,14 @@ export class Logger {
             this._logLevel = LOG_LEVELS[options.level];
         }
 
+        if (options.logToParent == null) {
+            options.logToParent = true;
+        }
+
         let appendedFields = Object.assign({}, options);
         this.removeDefaultFields(appendedFields);
 
-        if (this._isMaster != true) {
+        if (this._isMaster != true && process.send != null && options.logToParent === true) {
             this.trace = (msg: any) => {
                 if (this._logLevel <= LOG_LEVELS.trace) {
                     msg = Logger.transformError(msg);
@@ -210,14 +214,16 @@ export class Logger {
 
     private sendMessage(msg: any, level: LogLevel) {
         try {
-            // flatten object in case of circular references        
-            let m = stringify(msg);
-            let t: IIpcLogMessage = {
-                isLog: true,
-                level: level,
-                contents: m
-            };
-            process.send(t);
+            if (process.send != null) {
+                // flatten object in case of circular references        
+                let m = stringify(msg);
+                let t: IIpcLogMessage = {
+                    isLog: true,
+                    level: level,
+                    contents: m
+                };
+                process.send(t);
+            }
         } catch (ex) {
             // we have a problem... an error in the logger
             console.log(ex);

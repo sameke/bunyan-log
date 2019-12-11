@@ -9,13 +9,15 @@ let log = new Logger({
 
 if (cluster.isMaster) {
     log.debug('this is master');
+    console.log(`master pid: ${process.pid}`);
     w = cluster.fork();
 
     w.on('exit', () => {
         console.log('exited!!!!!!!!!!!!!');
     });
 } else {
-    console.log('created fork');
+    console.log(`fork pid: ${process.pid}`);
+
     log.debug('this is fork');
 
     let obj = { a: 'hello' };
