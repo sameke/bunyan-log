@@ -144,7 +144,7 @@ export class Logger {
             this.child = this._logger.child.bind(this._logger);
             this.addStream = this._logger.addStream.bind(this._logger);
 
-            cluster.on('fork', (worker: cluster.Worker) => {
+            cluster.on('fork', (worker: any) => {
                 worker.on('message', (message: any) => {
                     if (message != null && message.isLog === true) {
                         let logMessage: IIpcLogMessage = message;
